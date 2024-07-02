@@ -1,4 +1,4 @@
-print("in init.lua")
+local M = {}
 
 local function clean_url(url)
 	-- trim enclosing double quotes from url
@@ -8,9 +8,8 @@ local function clean_url(url)
 end
 
 local function is_valid_url(url)
-	local trimmed = clean_url(url)
 	local pattern = '^https?://[%w-_%.%?%.:/%+=&]*[^"]*$'
-	return string.match(trimmed, pattern) ~= nil
+	return string.match(url, pattern) ~= nil
 end
 
 local function get_word_under_cursor()
@@ -32,23 +31,10 @@ local function get_word_under_cursor()
 		return ""
 	end
 
-	return line:sub(left, right - 1)
+	return clean_url(line:sub(left, right - 1))
 end
 
-local function open_url()
-	local word = get_word_under_cursor()
-	if is_valid_url(word) then
-		print("url: " .. word)
-	else
-		print('"' .. word .. '" is invalid url')
-	end
-end
-
-vim.api.nvim_create_user_command("UrlOpen", open_url, {})
-
-local M = {}
-M.test = function()
-	print("testing...")
-end
+M.is_valid_url = is_valid_url
+M.get_word_under_cursor = get_word_under_cursor
 
 return M
