@@ -12,4 +12,4 @@ local function open_url()
 	end
 end
 
-vim.api.nvim_create_user_command("UrlOpen", open_url, {})
+vim.api.nvim_create_user_command("URLOpen", open_url, {})

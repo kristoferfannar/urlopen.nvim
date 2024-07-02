@@ -7,7 +7,7 @@ Open URLs in your browser straight from your buffer
 In a neovim session, hover your cursor over a URL and type
 
 ```
-:UrlOpen
+:URLOpen
 ```
 
 If the URL is valid, you'll be navigated to your browser where it will be opened.
