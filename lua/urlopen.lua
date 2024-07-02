@@ -1,10 +1,16 @@
 print("in init.lua")
 
-local testurl = "https://google.com"
+local function clean_url(url)
+	-- trim enclosing double quotes from url
+	-- note that we can't simply use '^"(.-)"$' as that doesn't remove one-sided enclosing quotes
+	local trimmed = url:gsub('^"(.*)', "%1"):gsub('(.*)"$', "%1"):gsub("^'(.*)$", "%1"):gsub("(.*)'$", "%1")
+	return trimmed
+end
 
 local function is_valid_url(url)
+	local trimmed = clean_url(url)
 	local pattern = '^https?://[%w-_%.%?%.:/%+=&]*[^"]*$'
-	return string.match(url, pattern) ~= nil
+	return string.match(trimmed, pattern) ~= nil
 end
 
 local function get_word_under_cursor()
