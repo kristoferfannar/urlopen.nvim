@@ -16,6 +16,11 @@ If the URL is valid, you'll be navigated to your browser where it will be opened
 
 [Lazy.nvim](https://github.com/folke/lazy.nvim):
 
-```
-  "kristoferfannar/urlopen.nvim"
+```lua
+  {
+    "kristoferfannar/urlopen.nvim",
+    config = function()
+      require"urlopen"
+    end
+  },
 ```
