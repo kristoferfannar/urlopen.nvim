@@ -1,7 +1,8 @@
 local function clean_url(url)
 	-- trim enclosing double quotes from url
 	-- note that we can't simply use '^"(.-)"$' as that doesn't remove one-sided enclosing quotes
-	local trimmed = url:gsub('^"(.*)', "%1"):gsub('(.*)"$', "%1"):gsub("^'(.*)$", "%1"):gsub("(.*)'$", "%1")
+	local trimmed = url:gsub("^['\",]*(.-)", "%1"):gsub("(.-)[\"',]*$", "%1")
+
 	return trimmed
 end
 
@@ -13,6 +14,8 @@ end
 
 local urls = {
 	"https://google.com",
+	'"https://google.com",',
+	',"\',"https://google.com"",\'",,\',',
 	'"https://google.com"',
 	'"https://google.com',
 	'https://google.com"',
